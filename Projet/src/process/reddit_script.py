@@ -4,20 +4,24 @@ import os
 import time
 from typing import List, Dict
 from pathlib import Path
+from dotenv import load_dotenv
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 # Le fichier de configuration
-def load_config() -> Dict:
+def load_config() -> Dict[str, str]:
      return {
-        "client_id": "7ni1gEKaRTxgsgKdBjO4Lw",
-        "client_secret": "iNHYSIznBqCxH36azpr1yclUVxsEtA",
-        "user_agent": "RealisticLeg2210"
+        "client_id": os.getenv("REDDIT_CLIENT_ID"),
+        "client_secret": os.getenv("REDDIT_CLIENT_SECRET"),
+        "user_agent": os.getenv("REDDIT_USER_AGENT")
     }
 
 def collect_reddit(sub_name:str) -> List[Dict]:
     # Utiliser la configuration
     config = load_config()
+    if not all(config.values()):
+        raise ValueError("Configuration de l’API Reddit incomplète")
+    
     reddit = praw.Reddit(
         client_id=config["client_id"],
         client_secret=config["client_secret"],
@@ -34,28 +38,29 @@ def collect_reddit(sub_name:str) -> List[Dict]:
         afin de maintenir la fréquence en dessous de 30 requêtes par minute.
         '''
         time.sleep(2)
-        if post.selftext.strip() != "":
-            post_data = {
+        if post.selftext.strip():
+            posts.append({
                 "title": post.title,
                 "author": str(post.author),
                 "content": post.selftext,
                 "score": post.score,
                 "num_comments": post.num_comments,
                 "url": post.url
-            }
+            })
             posts.append(post_data)
     return posts
 
-def save_data(data: List[Dict], save_path: Path) -> str:
+def save_data(data: List, save_path: Path) -> str:
     save_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(save_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     
-    return str(save_path.absolute())
+    return str(save_path)
 
 def main():
     # Dossier de sauvegarde
+
     PROJECT_ROOT = Path(__file__).parent.parent.parent  
     SAVE_DIR = PROJECT_ROOT / "data" / "raw"        
     SAVE_FILE = "severance_posts.json"                 
