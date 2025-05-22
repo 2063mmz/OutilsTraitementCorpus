@@ -1,4 +1,4 @@
-# Projet de scraping de données Allociné
+# Projet de scraping de données Allociné -- CAO Yue
 ## Présentation du projet  
 Ce dépôt contient 8 scripts. Le script `crawler.py` sert à récupérer le contenu du site. Trois scripts de `visualisation_*.py` permettent d’afficher les commentaires, pour avoir des stats plus précises, j’ai aussi nettoyé un peu les textes. `synonym_dict.py` et `augmentation_corpus.py` servent à enrichir le corpus avec la méthode de remplacement par synonymes (SR). Enfin, `modele.py` et `evaluation.py` sont là pour faire le fine-tuning et évaluer du modèle.
 
