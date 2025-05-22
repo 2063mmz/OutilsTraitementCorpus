@@ -1,6 +1,7 @@
 # Projet de scraping de données Allociné
 ## Présentation du projet  
-Dans ce projet, l’idée c’était de créer un système qui arrive à classifier automatique des sentiments à partir de critiques textuelles. Le besoin auquel je réponds est celui de l’analyse d’opinion appliquée aux critiques de séries, afin d’identifier automatiquement si un avis est positif ou négatif. 
+Dans ce projet, l’idée c’était de créer un système qui arrive à classifier automatique des sentiments à partir de critiques textuelles. Le besoin auquel je réponds est celui de l’analyse d’opinion appliquée aux critiques de séries, afin d’identifier automatiquement si un avis est positif ou négatif. Le fichier CSV contenant les données extraites du site web a été accidentellement mis sur GitHub, mais je l’ai déjà supprimé.
+
 
 Le sujet que j’ai extrait les critiques de la série _The Last of Us_ sur **Allociné**. J’ai classé les commentaires en positifs et négatifs en fonction des notes (0-5), comme il y avait assez peu de données, je n’ai pas inclus de catégorie neutre. Donc, 1 pour les avis positifs (note ≥ 3.0), 0 pour les avis négatifs (note < 3.0)
 
