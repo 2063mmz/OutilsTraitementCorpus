@@ -21,7 +21,7 @@ plot_tfidf:
 
 # Générer un dictionnaire de synonymes (pour l'augmentation de données)
 synonyms:
-	$(PYTHON) src/process/synonym_dict.py
+	$(PYTHON) src/process/synonym_dict.py data/clean/synonym_dict.json
 
 # Augmenter les données avec remplacement par synonymes
 augment:
